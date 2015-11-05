@@ -77,7 +77,7 @@ module AESCrypt
     aes = OpenSSL::Cipher::Cipher.new(cipher_type)
     aes.encrypt
     aes.key = key
-    aes.iv = iv if iv != nil
+    aes.iv = (iv.nil? ? aes.random_iv : iv)
     aes.update(data) + aes.final      
   end
 end
